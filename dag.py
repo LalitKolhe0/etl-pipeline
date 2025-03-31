@@ -7,7 +7,7 @@ default_args = {
     'owner': 'airflow',
     'start_date': datetime(2023, 12, 18),
     'depends_on_past': False,
-    'email': ['vishal.bulbule@techtrapture.com'],
+    'email': ['lalitkolhe2010@gmail.com'],
     'email_on_failure': False,
     'email_on_retry': False,
     'retries': 1,
@@ -23,14 +23,15 @@ dag = DAG('employee_data',
 with dag:
     run_script_task = BashOperator(
         task_id='extract_data',
-        bash_command='python /home/airflow/gcs/dags/scripts/extract.py',
+        bash_command='python /home/airflow/gcs/dags/extract.py',
     )
 
     start_pipeline = CloudDataFusionStartPipelineOperator(
     location="us-central1",
     pipeline_name="etl-pipeline",
-    instance_name="datafusion-dev",
+    instance_name="datafusion-dev1",
     task_id="start_datafusion_pipeline",
     )
 
     run_script_task >> start_pipeline
+    
